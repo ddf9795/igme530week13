@@ -1,0 +1,24 @@
+{
+  "name": "standoff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/app.js",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "echo \"tests complete\""
+  },
+  "author": "Dean Flint",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "compression": "^1.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "howler": "^2.2.4",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "pixi.js": "^8.9.1",
+    "socket.io": "^4.8.1"
+  }
+}

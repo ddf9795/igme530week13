@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="/assets/player.js"></script>
+        <style>
+            @media screen and (max-width: 600px) {
+                body {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100vh;
+                    background-color: black;
+                    font-family: monospace;
+                    color: white;
+                    gap: 25px;
+                }
+                .touchSurface {
+                width: 150px;
+                height: 150px;
+                margin: auto;
+                font-size: 30px;
+                background-color: gray;
+                color: black;
+                text-align: center;
+                border: 2px solid black;
+                font-family: monospace;
+                user-select: none;
+                }
+                .p1 {
+                    background-color: red;
+                    color: white;
+                }
+                .p2 {
+                    background-color: limegreen;
+                    color: black;
+                }
+                .p3 {
+                    background-color: blue;
+                    color: white;
+                }
+                .p4 {
+                    background-color: yellow;
+                    color: black;
+                }
+                .disabled {
+                    background-color: rgb(66, 66, 66);
+                }
+                .hidden {
+                    display: none;
+                }
+                .visible {
+                    display: inline-block;
+                };
+            }
+            @media screen and (min-width: 600px) {
+                body {
+                background-color: black;
+                font-family: monospace;
+                color: white;
+                text-align: center;
+                align-items: center;
+                display: flex;
+                flex-direction: row;
+                gap: 25px;
+                justify-content: center;
+                height: 50vh;
+                max-width: 800px;
+                margin: auto;
+                }
+                .touchSurface {
+                    width: 150px;
+                    height: 150px;
+                    margin: auto;
+                    font-size: 30px;
+                    background-color: gray;
+                    color: black;
+                    text-align: center;
+                    border: 2px solid black;
+                    font-family: monospace;
+                    user-select: none;
+                }
+                .p1 {
+                    background-color: red;
+                    color: white;
+                }
+                .p2 {
+                    background-color: limegreen;
+                    color: black;
+                }
+                .p3 {
+                    background-color: blue;
+                    color: white;
+                }
+                .p4 {
+                    background-color: yellow;
+                    color: black;
+                }
+                .disabled {
+                    background-color: rgb(66, 66, 66);
+                }
+                .hidden {
+                    display: none;
+                }
+                .visible {
+                    display: inline-block;
+                };
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>STANDOFF</title>
+    </head>
+    <body>
+        <div id="p1Shoot" class="touchSurface p1 hidden"></div>
+        <div id="p2Shoot" class="touchSurface p2 hidden"></div>
+        <div id="p3Shoot" class="touchSurface p3 hidden"></div>
+        <div id="p4Shoot" class="touchSurface p4 hidden"></div>
+        <div id="dodge" class="touchSurface hidden">EVADE</div>
+        <div id="noClients" class="hidden">YOU HAVE NO AUDIENCE</div>
+        <div id="killScreen" class="hidden">MORTIS</div>
+        <div id="noSpace" class="hidden">WAIT YOUR TURN</div>
+    </body>
+</html>
