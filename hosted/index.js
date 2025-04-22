@@ -25,11 +25,13 @@ const Player = (id) => {
         shootPrefire: 0,
         shootPrefireMax: 50,
         shootCooldown: 0,
-        shootCooldownMax: 250,
+        shootCooldownMax: 300,
         evasionWindow: 0,
         evasionWindowMax: 50,
         evadeCooldown: 0,
         evadeCooldownMax: 150,
+        recoilCooldown: 0,
+        recoilCooldownMax: 300,
         alive: true,
         vis: null,
         gun: null,
@@ -111,6 +113,10 @@ const Player = (id) => {
         connectedPlayers[id].alive = false;
         playerInstances[id] = null;
         socket.emit('killPlayer', id, socket.id);
+        for (let i = 0; i < Object.keys(connectedPlayers).length; i++) {
+            if (connectedPlayers[i] === null) continue;
+            connectedPlayers[i].recoilCooldown = connectedPlayers[i].recoilCooldownMax;
+        }
     }
 
     socket.on('inputFromController', (msg) => {
@@ -282,6 +288,13 @@ const Player = (id) => {
                 }
                 if (player.evadeCooldown <= 0) {
                     socket.emit("activateButtons", player.id, playerInstances[player.id]);
+                }
+            }
+
+            if (player.recoilCooldown > 0) {
+                player.recoilCooldown -= 1;
+                if (player.recoilCooldown <= 0) {
+                    socket.emit("activateButtonsUnconditional");
                 }
             }
 

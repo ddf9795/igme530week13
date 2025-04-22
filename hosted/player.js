@@ -31,6 +31,15 @@ socket.on('buttonsActivated', (id, msg) => {
     }
 })
 
+socket.on('buttonsActivatedUnconditional', () => {
+    const dodgeButton = document.getElementById('dodge');
+    dodgeButton.classList.remove('disabled');
+    for (let i = 0; i < Object.keys(playerInstances).length; i++) {
+        const player = document.getElementById(`p${i + 1}Shoot`);
+        player.classList.remove('disabled');
+    }
+})
+
 socket.on('clientConnected', (pInsts, cCount) => {
     playerInstances = pInsts;
     const noClients = document.getElementById('noClients');
@@ -110,10 +119,14 @@ const emitDisconnect = () => {
 const setupButton = (elementId, ctrlIdentifier) => {
     const element = document.getElementById(elementId);
 
-    element.addEventListener('mousedown', () => emitControl(`${ctrlIdentifier}`));
+    element.addEventListener('mousedown', () => {
+        if (element.classList.contains('disabled')) return;
+        emitControl(`${ctrlIdentifier}`)
+    });
 
     element.addEventListener('touchstart', (e) => {
         e.preventDefault();
+        if (element.classList.contains('disabled')) return;
         emitControl(`${ctrlIdentifier}`);
     });
 };
@@ -153,6 +166,14 @@ socket.on('playerKilled', (id, msg) => {
         laugh.play()
 
         bweew.play()
+    }
+    else {
+        const dodgeButton = document.getElementById('dodge');
+        dodgeButton.classList.add('disabled');
+        for (let i = 0; i < Object.keys(playerInstances).length; i++) {
+            const player = document.getElementById(`p${i + 1}Shoot`);
+            player.classList.add('disabled');
+        }
     }
 })
 

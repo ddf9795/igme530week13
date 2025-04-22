@@ -91,6 +91,13 @@ const registerIo = (ioObj) => {
             };
             io.emit('buttonsActivated', id, msg);
         })
+        socket.on('activateButtonsUnconditional', () => {
+            if (clientConnected <= 0) {
+                io.emit('noClients');
+                return;
+            };
+            io.emit('buttonsActivatedUnconditional');
+        })
     });
 };
 
